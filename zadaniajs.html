@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zadania</title>
+</head>
+<body>
+<!-- Zadanie nr_3 Gerarda G.-->
+    <h1>Witaj w Raju Komputerów!</h1>
+    <h2>Wybierz swoje produkty:</h2>
+    <label><input type="checkbox" value="499"> Obudowa</label><br>
+    <label><input type="checkbox" value="2599"> Karta Graficzna</label><br>
+    <label><input type="checkbox" value="999"> Płyta Główna</label><br>
+    <label><input type="checkbox" value="1699"> Procesor</label><br>
+    <p id="podsumowanie">Wybrane produkty:  Łącznie: 0 zł</p>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const podsumowanie = document.getElementById("podsumowanie");
+
+            checkboxes.forEach(function(checkbox) {
+                checkbox.addEventListener('change', function() {
+                    let suma = 0;
+                    checkboxes.forEach(function(checkbox) {
+                        if (checkbox.checked) {
+                            suma += parseInt(checkbox.value);
+                        }
+                    });
+                    podsumowanie.textContent = 'Wybrane produkty: ';
+                    checkboxes.forEach(function(checkbox) {
+                        if (checkbox.checked) {
+                            podsumowanie.textContent += checkbox.parentElement.textContent.trim() + ', ';
+                        }
+                    });
+                    podsumowanie.textContent += `Łącznie: ${suma} zł`;
+                });
+            });
+        });
+
+    
+    </script>
+    <!-- Zadanie nr_1 Serhiego Skiby  -->
+        <h1>Wybierz miejsce docelowe:</h1>
+        <form id="biletyForm">
+            <label><input type="radio" name="miejsce" value="25"> Wrocław Główny</label><br>
+            <label><input type="radio" name="miejsce" value="12"> Jaworzyna Śląska</label><br>
+            <label><input type="radio" name="miejsce" value="13"> Sobótka</label><br>
+            <button type="button" onclick="pokazCene()">Pokaż cenę biletu</button>
+        </form>
+        <p id="cena"></p>
+    
+        <script>
+            function pokazCene() {
+                const form = document.getElementById('biletyForm');
+                const selectedOption = form.querySelector('input[name="miejsce"]:checked');
+    
+                if (selectedOption) {
+                    const cenaBiletu = parseFloat(selectedOption.value).toFixed(2);
+                    document.getElementById('cena').textContent = `Cena biletu: ${cenaBiletu} zł`;
+                } else {
+                    document.getElementById('cena').textContent = "Proszę wybrać miejsce docelowe!";
+                }
+            }
+        </script>
+        <!-- Zadanie nr_2 Jana Gołębiowskiego-->
+        <h1>Wybierz wypiek:</h1>
+        <form id="cukierniaForm">
+            <label><input type="radio" name="wypiek" value="15"> Biszkopt - 15 zł</label><br>
+            <label><input type="radio" name="wypiek" value="9"> Sernik - 9 zł</label><br>
+            <label><input type="radio" name="wypiek" value="12"> Szarlotka - 12 zł</label><br>
+            <label><input type="radio" name="wypiek" value="6"> Pączek - 6 zł</label><br>
+            <button type="button" onclick="pokazWynik()">Pokaż cenę wypieku</button>
+        </form>
+        <p id="wynik"></p>
+    
+        <script>
+            function pokazWynik() {
+                const form = document.getElementById('cukierniaForm');
+                const selectedOption = form.querySelector('input[name="wypiek"]:checked');
+    
+                if (selectedOption) {
+                    const cenaWypieku = parseFloat(selectedOption.value).toFixed(2);
+                    document.getElementById('wynik').textContent = `Cena wypieku: ${cenaWypieku} zł`;
+                } else {
+                    document.getElementById('wynik').textContent = "Proszę wybrać wypiek!";
+                }
+            }
+        </script>
+</body>
+</html>
